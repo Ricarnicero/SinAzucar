@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio de sesión</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.8.4/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.8.4/firebase-auth.js"></script>
+
+    <script defer src="/__/firebase/init.js"></script>
+    <script src="js/Autenticacion.js"></script>
+    <script src="js/AuthController.js" defer></script>
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/w3-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        .vl {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            border: 2px solid #ffad33;
+            height: 175px;
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.modal').modal();
+        });
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCdzPSaOANFKK-qT66cTBw0wv8A3N-QNms",
+            authDomain: "sin-azucar.firebaseapp.com",
+            databaseURL: "https://sin-azucar.firebaseio.com",
+            projectId: "sin-azucar",
+            storageBucket: "sin-azucar.appspot.com",
+            messagingSenderId: "542047715275"
+        };
+        firebase.initializeApp(config);
+    </script>
+</head>
+
+<body class="w3-theme-l5">
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align:center">Inicia sesión</h2>
+                <div class="vl hide-on-small-only">
+                </div>
+
+                <div class="col s12 m6">
+                    <a class="w3-btn w3-indigo waves-effect waves-light w3-block" id="Facebook">
+                        <i class="fa fa-facebook fa-fw"></i> Inicia sesión con Facebook
+                    </a>
+                    <a class="w3-btn w3-blue waves-effect waves-light w3-block w3-margin-top" id="Twitter">
+                        <i class="fa fa-twitter fa-fw"></i> Inicia sesión con Twitter
+                    </a>
+                    <a class="w3-btn w3-red waves-effect waves-light w3-block w3-margin-top" id="Google">
+                        <i class="fa fa-google fa-fw"></i> Inicia sesión con Google
+                    </a>
+                </div>
+
+                <div class="col s12 m6">
+                    <div class="hide-on-med-and-up">
+                        <p>Or sign in manually:</p>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="email_login" type="email" class="validate">
+                        <label for="email_login">Correo electrónico</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="pass_login" type="password" class="validate">
+                        <label for="pass_login">Contraseña</label>
+                    </div>
+                    <a href="#" style="color:white" class="btn w3-green w3-left" id="initSesion">Iniciar sesión</a>
+                </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6 center-align">
+                <a class="btn modal-trigger" href="#modal1">Sign up</a>
+            </div>
+            <div class="col s12 m6 center-align">
+                <a href="#" style="color:white" class="btn">Forgot password?</a>
+            </div>
+        </div>
+    </div>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h1>Registrarse</h1>
+            <p>Llena el siguiente formulario para crear una cuenta.</p>
+            <hr>
+            <div class="input-field inline">
+                <input id="name_reg" type="text" class="validate">
+                <label for="name_reg">Nombre</label>
+            </div>
+            <div class="input-field inline">
+                <input id="email_reg" type="email" class="validate">
+                <label for="email_reg">Correo electrónico</label>
+            </div>
+
+            <div class="input-field inline">
+                <input id="pass_reg" type="password" class="validate">
+                <label for="pass_reg">Contraseña</label>
+            </div>
+
+            <div class="input-field inline">
+                <input id="pass_again_reg" type="password" class="validate">
+                <label for="pass_again_reg">Repite tu contraseña</label>
+            </div>
+            <hr>
+
+            <p>Al crear tu cuenta aceptas nuestros <a href="#">Terminos y Condiciones</a>.</p>
+            <button class="btn" id="registerUsr">Registrar</button>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+</body>
+
+</html>
