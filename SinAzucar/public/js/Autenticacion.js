@@ -1,11 +1,21 @@
 class Autenticacion {
+    closeSesion(redirect) {
+        firebase.auth().signOut();
+        if (redirect) location.href = 'login.html'
+    }
+
     AuthEmail_Password(email, pass) {
-        firebase.auth().signInWithEmailAndPassword(email,pass).then(resultado=>{
-            M.toast({html: 'Bienvenido '+ resultado.user.displayName, classes: 'rounded'});
-        })
-        .catch(error =>{
+        firebase.auth().signInWithEmailAndPassword(email, pass).then(resultado => {
+            if (resultado.user.emailVerified) {
+                M.toast({ html: 'Bienvenido ' + resultado.user.displayName, classes: 'rounded' });
+            }
+            else {
+                M.toast({ html: 'Realiza la verificación de tu correo: ' + resultado.user.email, classes: 'rounded' });
+                closeSesion(false);
+            }
+        }).catch(error => {
             console.error(error);
-            M.toast({html: error, classes: 'rounded'});
+            M.toast({ html: error, classes: 'rounded' });
         })
     }
 
@@ -17,7 +27,7 @@ class Autenticacion {
                 });
 
                 const configuracion = {
-                    url: 'http://localhost:5000/'
+                    url: 'http://localhost:5000/login.html'
                 }
 
                 resultado.user.sendEmailVerification(configuracion)
@@ -25,11 +35,8 @@ class Autenticacion {
                         console.error(error);
                     });
 
-                firebase.auth().signOut();
-
-                M.toast({html: "Bienvenido ${name} .", classes: 'rounded'});
-                //console.log("Bienvenido ${name} .");
-
+                closeSesion(false);
+                M.toast({ html: 'Por favor, verifica tu correo para poder continuar.', classes: 'rounded' });
 
             })
             .catch(error => {
@@ -46,7 +53,7 @@ class Autenticacion {
                 //$("#avatar").attr('src',resultado.user.photoURL)
                 //nombre
                 //$("#navName").text(resultado.user.displayName)
-                M.toast({html: 'Bienvenido '+ resultado.user.displayName, classes: 'rounded'});
+                M.toast({ html: 'Bienvenido ' + resultado.user.displayName, classes: 'rounded' });
             })
             .catch(error => {
                 console.error(error);
@@ -58,11 +65,7 @@ class Autenticacion {
 
         firebase.auth().signInWithPopup(provider)
             .then(resultado => {
-                //foto de perfil
-                //$("#avatar").attr('src',resultado.user.photoURL)
-                //nombre
-                M.toast({html: 'Bienvenido '+ resultado.user.displayName, classes: 'rounded'});
-
+                M.toast({ html: 'Bienvenido ' + resultado.user.displayName, classes: 'rounded' });
             })
             .catch(error => {
                 console.error(error);
