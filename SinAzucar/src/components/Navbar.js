@@ -30,7 +30,7 @@ class Navbar extends React.Component {
             />
           </div>
         </nav>
-        <NavbarList navId="mobile-demo" className="sidenav" />
+        <NavbarList navId="mobile-demo" className="sidenav green lighten-2" />
       </React.Fragment>
     );
   }
