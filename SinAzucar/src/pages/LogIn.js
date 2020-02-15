@@ -1,18 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import ReactPlayer from 'react-player';
 
-class LogIn extends React.Component {
-  render() {
+export default function LogIn(props){
     return (
       <React.Fragment>
-        <ReactPlayer url='../media/login.mp4' playing loop width="100%" height="100%"/>
-        <div className="container text-center">
+        <div className="container shadow">
+          <div className="col-md-6 mx-auto">
+        <div className="d-flex text-center">
           <h1>¡Bienvenido!</h1>
           <br />
         </div>
-        <div className="container">
-          <div className="col-6 mx-auto">
             <h3 className="text-center">Inicia sesion</h3>
             <form className="was-validated" id="formLogin">
               <div className="form-group">
@@ -22,8 +18,10 @@ class LogIn extends React.Component {
                   className="form-control"
                   id="uname"
                   placeholder="Correo"
-                  name="uname"
+                  name="email"
                   required
+                  onChange={props.inputChange}
+                  value={props.email}
                 />
                 <div className="valid-feedback">Valid.</div>
                 <div className="invalid-feedback">Por favor, llena este campo.</div>
@@ -35,26 +33,24 @@ class LogIn extends React.Component {
                   className="form-control"
                   id="pwd"
                   placeholder="Contrasena"
-                  name="pswd"
+                  name="pass"
                   required
+                  onChange={props.inputChange}
+                  value={props.pass}
                 />
                 <div className="valid-feedback">Valid.</div>
                 <div className="invalid-feedback">Por favor, llena este campo.</div>
               </div>
               <div className="form-group">
-                <button type="submit" className="btn btn-primary">
+                <button type="button" className="btn btn-primary" onClick={props.buttonClick}>
                   Iniciar sesión
                 </button>
               </div>
               <div className="form-group">
-                <Link to="/">Olvidaste tu contraseña?</Link>
               </div>
             </form>
           </div>
         </div>
       </React.Fragment>
     );
-  }
 }
-
-export default LogIn;
