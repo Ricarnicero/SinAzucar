@@ -1,17 +1,39 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import {render} from "react-dom";
 import * as serviceWorker from "./serviceWorker";
-import App from "./App";
-import Firebase, {FirebaseContext } from './firebase'
+import MyRouter from "./components/Router";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { FirebaseAppProvider,SuspenseWithPerf } from 'reactfire';
+import 'firebase/performance';
+import LogIn from "./pages/LogIn";
 
-const container = document.getElementById("root");
+const config = {
+	apiKey: "AIzaSyCdzPSaOANFKK-qT66cTBw0wv8A3N-QNms",
+	authDomain: "sin-azucar.firebaseapp.com",
+	databaseURL: "https://sin-azucar.firebaseio.com",
+	projectId: "sin-azucar",
+	storageBucket: "sin-azucar.appspot.com",
+	messagingSenderId: "542047715275",
+	appId: "1:542047715275:web:ccb91ad3e16a22765e004e"
+};
 
-ReactDOM.render(
-<FirebaseContext.Provider value={new Firebase()}>
-    <App />
-  </FirebaseContext.Provider>,
-   container);
-   
+// render(
+// 	<FirebaseAppProvider firebaseConfig={config}>
+// 		<MyRouter />
+// 	</FirebaseAppProvider>,
+// 	container
+// );
+function App(){
+return (<FirebaseAppProvider firebaseConfig={config}>
+		<SuspenseWithPerf
+				fallback={<p>loading burrito status...</p>}
+				traceId={"load-status"}>
+		<LogIn />
+		</SuspenseWithPerf>
+	</FirebaseAppProvider>)
+}
+render(<App/>,document.getElementById("root"));
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
