@@ -5,7 +5,6 @@ import MyRouter from "./components/Router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FirebaseAppProvider,SuspenseWithPerf } from 'reactfire';
 import 'firebase/performance';
-import LogIn from "./pages/LogIn";
 
 const config = {
 	apiKey: "AIzaSyCdzPSaOANFKK-qT66cTBw0wv8A3N-QNms",
@@ -17,18 +16,12 @@ const config = {
 	appId: "1:542047715275:web:ccb91ad3e16a22765e004e"
 };
 
-// render(
-// 	<FirebaseAppProvider firebaseConfig={config}>
-// 		<MyRouter />
-// 	</FirebaseAppProvider>,
-// 	container
-// );
 function App(){
 return (<FirebaseAppProvider firebaseConfig={config}>
 		<SuspenseWithPerf
-				fallback={<p>loading burrito status...</p>}
+				fallback={<p>Cargando</p>}
 				traceId={"load-status"}>
-		<LogIn />
+			<MyRouter />
 		</SuspenseWithPerf>
 	</FirebaseAppProvider>)
 }

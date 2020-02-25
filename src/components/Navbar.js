@@ -1,39 +1,31 @@
 import React from "react";
-
-class Navbar extends React.Component { 
-  state = {displayName:null}
-
-  componentDidMount() {
-    // Auto initialize all the things!
-    if(this.props.usuario)
-    this.setState({displayName:this.props.usuario.email})
-  }
-  
-  render() {
+import { useUser } from "reactfire";
+import 'firebase/auth';
+import 'firebase/performance';
+import { Navbar,NavDropdown,Form,Nav,FormControl,Button,Image } from "react-bootstrap";
+import { NavLink, Link,  useHistory,
+  useLocation } from "react-router-dom";
+export default function MyNavbar() { 
+  const usuario = useUser();
+  let history = useHistory();
     return (
-      <React.Fragment>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
-  <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <button type="button" className="navbar-brand">Hidden brand</button>
-    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li className="nav-item active">
-        <button type="button" className="nav-link" href="#">Home <span className="sr-only">(current)</span></button>
-      </li>
-      <li className="nav-item">
-        <button type="button" className="nav-link" href="#">Link</button>
-      </li>
-      <li className="nav-item">
-        <button type="button" className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</button>
-      </li>
-    </ul>
-  </div>
-</nav>
-      </React.Fragment>
+      <Navbar bg="success" expand="lg" variant="dark" sticky="top">
+        <Nav.Item>
+          <Link to='/perfil'>
+          <Image src={usuario.photoURL} roundedCircle />
+          </Link>
+        </Nav.Item>
+  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+  <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="mr-auto">
+    <Nav.Link onClick={() => {history.replace('/receta')}}>Receta</Nav.Link>
+      <Nav.Link onClick={() => {history.replace('/')}}>Inicio</Nav.Link>
+    </Nav>
+    <Form inline>
+      <FormControl type="text" placeholder="Buscar receta..." className="mr-sm-2" />
+      <Button variant="outline-light">Buscar</Button>
+    </Form>
+  </Navbar.Collapse>
+</Navbar>
     );
   }
-}
-
-export default Navbar;

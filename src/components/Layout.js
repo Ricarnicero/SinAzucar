@@ -1,17 +1,16 @@
 import React from "react";
-import Navbar from "./Navbar";
-import { SuspenseWithPerf } from "reactfire";
+import MyNavbar from "./Navbar";
 import "firebase/performance";
-
+import { AuthCheck } from "reactfire";
+import 'firebase/auth';
+import LogIn from "../pages/LogIn";
 export default function Layout(props) {
 	return (
 		<React.Fragment>
-			<SuspenseWithPerf
-				fallback={"loading burrito status..."}
-				traceId={"load-status"}>
-				<Navbar />
-				{props.children}
-			</SuspenseWithPerf>
+		<AuthCheck fallback={<LogIn/>}>				
+					<MyNavbar />
+					{props.children}
+			</AuthCheck>
 		</React.Fragment>
 	);
 }

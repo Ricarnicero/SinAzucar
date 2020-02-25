@@ -1,19 +1,31 @@
 import React from "react";
-import { useAuth } from "reactfire";
+import { useAuth,useFirebaseApp } from "reactfire";
 import "firebase/performance";
 import 'firebase/auth';
-
-export default function LogIn() {
-  const fbauth = useAuth()();
+export default function LogIn(props) {
+  const fbauth = useAuth();
+  const firebaseObject = useFirebaseApp();
 	const BtnClickLogin = (e) => {
-		fbauth.signInWithEmailAndPassword("ads@asd.com", "asdasd")
+		let mail = document.getElementById('uname').value
+		let pass = document.getElementById('pwd').value
+		fbauth.signInWithEmailAndPassword(mail, pass)
 			.then((res) => {
-				console.log(res);
+				console.log('login ok');
 			})
 			.catch(function(error) {
-				console.log(error);
+				console.error(error);
 			});
 	};
+
+	const BtnFBClickLogin = () =>{
+		console.log(firebaseObject.firebase_.auth.FacebookAuthProvider())
+		var provider = new firebaseObject.firebase_.auth.FacebookAuthProvider();
+		provider.setCustomParameters({
+			'display': 'popup'
+		  });
+		fbauth.signInWithPopup(provider).then(res => {console.log('login ok')})
+		.catch(res => {console.error(res)})
+	}
 
 	return (
 		<React.Fragment>
@@ -61,6 +73,13 @@ export default function LogIn() {
 									className="btn btn-primary"
 									onClick={BtnClickLogin}>
 									Iniciar sesión
+								</button>
+								<br/>
+								<button
+									type="button"
+									className="btn btn-primary"
+									onClick={BtnFBClickLogin}>
+									Iniciar sesión con fb
 								</button>
 							</div>
 						</form>
