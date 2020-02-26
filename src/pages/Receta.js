@@ -1,9 +1,11 @@
 import React from "react";
 
-class Receta extends React.Component {
-  render() {
-    return "Receta";
-  }
-}
+export default function Receta(props){
+  const cual = props.match.params.idreceta
 
-export default Receta;
+  const mensaje = 'Receta' + ` #${cual}`
+  return (
+  <p>{mensaje}</p>
+  )
+
+};
